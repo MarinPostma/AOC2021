@@ -8,6 +8,14 @@ import System.Console.CmdArgs
 import Data.List
 import Control.Exception
 import Data.Void
+import Data.Char (digitToInt)
+import Data.Ratio
+import Data.Bits
+import Numeric
+import Data.Bifunctor
+import Debug.Trace
+import Control.Monad
+import Control.Arrow
 
 newtype Aoc = Aoc { day :: String }
   deriving (Show, Data, Typeable)
@@ -24,6 +32,8 @@ runCmd "day1_1" = runDay $ day1 0 . map read
 runCmd "day1_2" = runDay $ day1 2 . map read
 runCmd "day2_1" = runDay day2_1
 runCmd "day2_2" = runDay day2_2
+runCmd "day3_1" = runDay day3_1
+runCmd "day3_2" = runDay day3_2
 runCmd _ = print "unknown day!"
 
 day1 :: Int -> [Int] -> Int
@@ -45,3 +55,22 @@ day2_2 input = product $ take 2 $ foldl f [0, 0, 0] $ map words input
     f [x, y, aim] ["down", n] = [x, y, aim + read n]
     f [x, y, aim] ["up", n] = [x, y, aim - read n]
     f _ cmd = error $ "invalid command" ++ cmd !! 1
+
+day3_1 :: [String] -> Int
+day3_1 = uncurry (*) . join bimap readBin . findMostLeastCommon
+
+day3_2 :: [String] -> Int
+day3_2 input = product $ map (readBin . ($ input)) [filterBits 0 (fst . findMostLeastCommon), filterBits 0 (snd . findMostLeastCommon)]
+
+readBin = fst . head . readInt 2 (`elem` "01") digitToInt
+
+filterBits :: Int -> ([String] -> String) -> [String] -> String
+filterBits _ _ [input] = input
+filterBits i screen input = filterBits (succ i) screen (filter (\xs -> xs !! i == screen input !! i) input)
+
+findMostLeastCommon :: [String] -> (String, String)
+findMostLeastCommon = foldl appendBit ("", "") . avg . transpose . map f
+  where f = map digitToInt
+        avg = map $ \xs -> sum xs % length xs
+        appendBit (g, e) x = if x >= 1 % 2 then (g ++ "1", e ++ "0") else (g ++ "0", e ++ "1")
+        compute x = x * complement x
