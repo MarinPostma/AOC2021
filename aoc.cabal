@@ -25,6 +25,7 @@ source-repository head
 
 library
   exposed-modules:
+      Day4
       Lib
   other-modules:
       Paths_aoc
@@ -34,6 +35,7 @@ library
       base >=4.7 && <5
     , cmdargs >=0.10.21
     , lens >=4.19
+    , split >=0.2
   default-language: Haskell2010
 
 executable aoc-exe
@@ -48,6 +50,7 @@ executable aoc-exe
     , base >=4.7 && <5
     , cmdargs >=0.10.21
     , lens >=4.19
+    , split >=0.2
   default-language: Haskell2010
 
 test-suite aoc-test
@@ -63,4 +66,5 @@ test-suite aoc-test
     , base >=4.7 && <5
     , cmdargs >=0.10.21
     , lens >=4.19
+    , split >=0.2
   default-language: Haskell2010

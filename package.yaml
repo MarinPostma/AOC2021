@@ -23,6 +23,7 @@ dependencies:
 - base >= 4.7 && < 5
 - cmdargs >= 0.10.21
 - lens >= 4.19
+- split >= 0.2
 
 library:
   source-dirs: src

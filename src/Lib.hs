@@ -16,6 +16,7 @@ import Data.Bifunctor
 import Debug.Trace
 import Control.Monad
 import Control.Arrow
+import Day4
 
 newtype Aoc = Aoc { day :: String }
   deriving (Show, Data, Typeable)
@@ -34,6 +35,8 @@ runCmd "day2_1" = runDay day2_1
 runCmd "day2_2" = runDay day2_2
 runCmd "day3_1" = runDay day3_1
 runCmd "day3_2" = runDay day3_2
+runCmd "day4_1" = day4_1 . lines =<< getContents
+runCmd "day4_2" = day4_2 . lines =<< getContents
 runCmd _ = print "unknown day!"
 
 day1 :: Int -> [Int] -> Int
