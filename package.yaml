@@ -24,6 +24,7 @@ dependencies:
 - cmdargs >= 0.10.21
 - lens >= 4.19
 - split >= 0.2
+- containers >= 0.3
 
 library:
   source-dirs: src
