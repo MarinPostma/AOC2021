@@ -1,4 +1,5 @@
 {-# LANGUAGE TupleSections #-}
+{-# LANGUAGE NamedFieldPuns #-}
 module Day5 (day5_1, day5_2)
   where
 import Data.List.Split
@@ -6,6 +7,7 @@ import qualified Data.Map as Map
 import Control.Monad
 import Control.Arrow
 import Data.Bifunctor
+import Data.Tuple.Extra
 
 data Point = Point { x, y :: Int } deriving (Show, Eq, Ord)
 data Line = Line { p1, p2 :: Point } deriving (Show)
@@ -23,7 +25,7 @@ parseInput :: [String] -> [Line]
 parseInput = map (parseLine . splitOn " -> ")
 
 parseLine :: [String] -> Line
-parseLine [p1, p2] = uncurry Line $ join bimap parsePoint (p1, p2)
+parseLine [p1, p2] = uncurry Line $ both parsePoint (p1, p2)
 parseLine _ = error "bad input"
 
 parsePoint :: String -> Point
@@ -36,8 +38,8 @@ drawLine line
   | otherwise = drawDiagonal line
 
 drawDiagonal :: Line -> [Point]
-drawDiagonal line = take nPoints [Point x y | (x, y) <- iterate (\(x, y) -> (x + xdir, y + ydir)) (x p1, y p1)]
-  where Line { p1=p1, p2=p2 } = line
+drawDiagonal line = take nPoints [Point x y | (x, y) <- iterate (bimap (+ xdir) (+ ydir)) (x p1, y p1)]
+  where Line { p1, p2 } = line
         dir a b = (b - a) `div` abs (a - b)
         xdir = dir (x p1) (x p2)
         ydir = dir (y p1) (y p2)

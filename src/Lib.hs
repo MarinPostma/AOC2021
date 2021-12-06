@@ -18,6 +18,7 @@ import Control.Monad
 import Control.Arrow
 import Day4
 import Day5
+import Day6
 
 newtype Aoc = Aoc { day :: String }
   deriving (Show, Data, Typeable)
@@ -40,6 +41,8 @@ runCmd "day4_1" = day4_1 . lines =<< getContents
 runCmd "day4_2" = day4_2 . lines =<< getContents
 runCmd "day5_1" = day5_1 . lines =<< getContents
 runCmd "day5_2" = day5_2 . lines =<< getContents
+runCmd "day6_1" = day6_1 . lines =<< getContents
+runCmd "day6_2" = day6_2 . lines =<< getContents
 runCmd _ = print "unknown day!"
 
 day1 :: Int -> [Int] -> Int
