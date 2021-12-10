@@ -21,10 +21,10 @@ parseInput :: [String] -> M.Matrix Int
 parseInput = M.fromLists . map (map digitToInt)
 
 findMins :: M.Matrix Int -> [(Int, Int)]
-findMins m = map fst $ filter (\((i, j), n) -> all (> M.getElem i j m) n) [((i, j), map fst $ neighbors i j (\x y -> (x, y)/= (0, 0)) m) | i <- [1..M.nrows m], j <- [1..M.ncols m]]
+findMins m = map fst $ filter (\((i, j), n) -> all (> M.getElem i j m) n) [((i, j), map fst $ neighbors i j m) | i <- [1..M.nrows m], j <- [1..M.ncols m]]
 
-neighbors :: Int -> Int -> (Int -> Int -> Bool) -> M.Matrix Int -> [(Int, (Int, Int))]
-neighbors i j f m = filterMap id [makePoint (i + x) (j + y) m | x <- [-1..1], y <- [-1..1], f x y]
+neighbors :: Int -> Int ->  M.Matrix Int -> [(Int, (Int, Int))]
+neighbors i j m = filterMap id [makePoint (i + x) (j + y) m | x <- [-1..1], y <- [-1..1], abs x /= abs y]
 
 makePoint i j m = case M.safeGet i j m of
        Just val -> Just (val, (i, j))
@@ -33,7 +33,7 @@ makePoint i j m = case M.safeGet i j m of
 traversal :: Int -> Int -> M.Matrix Int -> S.Set (Int, Int) -> S.Set (Int, Int)
 traversal i j m s = case M.getElem i j m of
         9 -> s
-        other -> foldl traverseNeig (S.insert (i, j) s) $ neighbors i j (\x y -> abs x /= abs y) m
+        other -> foldl traverseNeig (S.insert (i, j) s) $ neighbors i j m
   where traverseNeig s (v, (i, j)) = if S.member (i, j) s || v == 9 then s else traversal i j m s
 
 filterMap :: (a -> Maybe b) -> [a] -> [b]
