@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Day10
+      Day11
       Day4
       Day5
       Day6
@@ -44,6 +45,7 @@ library
     , extra >=1.7
     , lens >=4.19
     , matrix >=0.3
+    , mtl >=2.2.2
     , split >=0.2
   default-language: Haskell2010
 
@@ -62,6 +64,7 @@ executable aoc-exe
     , extra >=1.7
     , lens >=4.19
     , matrix >=0.3
+    , mtl >=2.2.2
     , split >=0.2
   default-language: Haskell2010
 
@@ -81,5 +84,6 @@ test-suite aoc-test
     , extra >=1.7
     , lens >=4.19
     , matrix >=0.3
+    , mtl >=2.2.2
     , split >=0.2
   default-language: Haskell2010
