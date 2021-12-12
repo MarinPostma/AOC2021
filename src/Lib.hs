@@ -24,6 +24,7 @@ import Day8
 import Day9
 import Day10
 import Day11
+import Day12
 
 newtype Aoc = Aoc { day :: String }
   deriving (Show, Data, Typeable)
@@ -58,6 +59,8 @@ runCmd "day10_1" = day10_1 . lines =<< getContents
 runCmd "day10_2" = day10_2 . lines =<< getContents
 runCmd "day11_1" = day11_1 . lines =<< getContents
 runCmd "day11_2" = day11_2 . lines =<< getContents
+runCmd "day12_1" = day12_1 . lines =<< getContents
+runCmd "day12_2" = day12_2 . lines =<< getContents
 runCmd _ = print "unknown day!"
 
 day1 :: Int -> [Int] -> Int
