@@ -28,6 +28,9 @@ library
       Day10
       Day11
       Day12
+      Day13
+      Day14
+      Day15
       Day4
       Day5
       Day6
@@ -44,6 +47,7 @@ library
     , cmdargs >=0.10.21
     , containers >=0.3
     , extra >=1.7
+    , heap >=1.0.0
     , lens >=4.19
     , matrix >=0.3
     , mtl >=2.2.2
@@ -63,6 +67,7 @@ executable aoc-exe
     , cmdargs >=0.10.21
     , containers >=0.3
     , extra >=1.7
+    , heap >=1.0.0
     , lens >=4.19
     , matrix >=0.3
     , mtl >=2.2.2
@@ -83,6 +88,7 @@ test-suite aoc-test
     , cmdargs >=0.10.21
     , containers >=0.3
     , extra >=1.7
+    , heap >=1.0.0
     , lens >=4.19
     , matrix >=0.3
     , mtl >=2.2.2

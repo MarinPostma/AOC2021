@@ -28,6 +28,7 @@ dependencies:
 - extra >= 1.7
 - matrix >= 0.3
 - mtl >= 2.2.2
+- heap >= 1.0.0
 
 library:
   source-dirs: src
